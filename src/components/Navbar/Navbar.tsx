@@ -8,8 +8,8 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-primary text-primary-foreground flex justify-between h-16 items-center shadow-md">
-      <Link to="/" className="font-bold">
+    <nav className="bg-primary text-primary-foreground flex justify-center sm:justify-between h-16 p-3 sm:p-8 items-center shadow-md">
+      <Link to="/" className="font-bold hidden sm:inline-block">
         inQool interview
       </Link>
       <ul className="flex gap-5">
