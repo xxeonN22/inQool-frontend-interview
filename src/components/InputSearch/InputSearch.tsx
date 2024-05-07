@@ -6,6 +6,8 @@ interface InputSearchProps {
   placeholder?: string;
   icon?: React.ReactNode;
   onChange: (value: string) => void;
+  id?: string;
+  name?: string;
 }
 
 const InputSearch = ({
@@ -14,12 +16,16 @@ const InputSearch = ({
   placeholder,
   icon,
   onChange,
+  id,
+  name,
 }: InputSearchProps) => {
   return (
     <div className={`relative ${width}`}>
       <Input
         className={`focus:border-accent focus-visible:ring-accent focus-visible:ring-offset-0 pr-8 ${className}`}
         placeholder={placeholder}
+        id={id}
+        name={name}
         onChange={(e) => onChange(e.target.value)}
       />
       {icon && (

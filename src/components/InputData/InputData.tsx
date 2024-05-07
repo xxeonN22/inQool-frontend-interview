@@ -8,11 +8,20 @@ interface InputDataProps {
   errorMessage?: string;
   span?: string;
   autocomplete?: string;
+  defaultValue: string;
 }
 
 const InputData = (props: InputDataProps) => {
-  const { className, placeholder, name, id, errorMessage, span, autocomplete } =
-    props;
+  const {
+    className,
+    placeholder,
+    name,
+    id,
+    errorMessage,
+    span,
+    autocomplete,
+    defaultValue,
+  } = props;
 
   return (
     <div className={span}>
@@ -27,6 +36,7 @@ const InputData = (props: InputDataProps) => {
         name={name}
         id={id}
         autoComplete={autocomplete}
+        defaultValue={defaultValue}
       />
     </div>
   );
