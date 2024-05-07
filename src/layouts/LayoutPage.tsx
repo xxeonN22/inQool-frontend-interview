@@ -6,7 +6,7 @@ const LayoutPage = () => {
   return (
     <>
       <Navbar />
-      <MainContent>
+      <MainContent className="p-3">
         <Outlet />
       </MainContent>
     </>
