@@ -8,7 +8,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-primary text-primary-foreground flex justify-between items-center p-6 shadow-md">
+    <nav className="bg-primary text-primary-foreground flex justify-between h-16 items-center shadow-md">
       <Link to="/" className="font-bold">
         inQool interview
       </Link>
