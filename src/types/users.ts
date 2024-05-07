@@ -6,4 +6,4 @@ export type User = BaseModelId & {
   banned: boolean;
 };
 
-export type AnimalForm = Omit<User, 'id'>;
+export type UserForm = Omit<User, 'id'>;
