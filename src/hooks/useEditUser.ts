@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormValues, formSchema } from '@/validationSchemas/user';
+import { User, UserForm } from '@/types/users';
+import { useUserEdit } from './useUsers';
 
-const useEditUser = (user: FormValues) => {
+const useEditUser = (user: User) => {
   const [open, setOpen] = useState(false);
+  const { mutate: editUser } = useUserEdit(user.id);
 
   const {
     register,
@@ -20,8 +23,13 @@ const useEditUser = (user: FormValues) => {
   });
 
   const onSubmit = (data: FormValues) => {
+    const payload: UserForm = {
+      name: data.name,
+      gender: data.gender,
+      banned: user.banned,
+    };
+    editUser(payload);
     setOpen(false);
-    console.log(data);
   };
   return {
     register,
