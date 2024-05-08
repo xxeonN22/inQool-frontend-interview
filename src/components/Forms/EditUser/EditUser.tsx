@@ -8,9 +8,10 @@ import { FormValues } from '@/validationSchemas/user';
 interface EditUserProps {
   user: FormValues;
   trigger: React.ReactNode | string;
+  triggerClass?: string;
 }
 
-const EditUser = ({ user, trigger }: EditUserProps) => {
+const EditUser = ({ user, trigger, triggerClass }: EditUserProps) => {
   const {
     register,
     handleSubmit,
@@ -23,7 +24,12 @@ const EditUser = ({ user, trigger }: EditUserProps) => {
   } = useEditUser(user);
 
   return (
-    <Modal trigger={trigger} open={open} onOpenChange={setOpen}>
+    <Modal
+      trigger={trigger}
+      open={open}
+      onOpenChange={setOpen}
+      triggerClass={triggerClass}
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
         <EditUserHeader userName={user.name} />
         <EditUserContent
