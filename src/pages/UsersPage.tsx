@@ -31,7 +31,7 @@ const UsersPage = () => {
   return (
     <>
       {data && !isLoading ? (
-        <GenericTable headers={headers}>
+        <GenericTable headers={headers} searchPlaceholder="Search by name...">
           <UsersTable users={data} />
         </GenericTable>
       ) : (
