@@ -1,31 +1,39 @@
 import AnimalsTable from '@/components/AnimalsTable/AnimalsTable';
-import GenericTable from '@/components/BaseTable/BaseTable';
+import BaseTable from '@/components/BaseTable/BaseTable';
+import { Button } from '@/components/ui/button';
 
 const headers = [
   {
-    name: 'ID',
-    className: 'w-[50px] hidden sm:flex items-center',
-  },
-  {
+    id: 1,
     name: 'Name',
+    className: 'px-0 sm:p-4 w-[40%]',
   },
   {
-    name: 'Gender',
+    id: 2,
+    name: 'Type',
+    className: 'px-0 sm:p-4 w-[25%]',
   },
   {
-    name: 'Banned',
-    width: 'w-[100px]',
+    id: 3,
+    name: 'Age',
+    className: 'px-0 sm:p-4 w-[10%] text-center',
   },
   {
+    id: 4,
     name: 'Actions',
+    className: 'px-0 sm:p-4 w-[25%] text-center',
   },
 ];
 
 const AnimalsPage = () => {
   return (
-    <GenericTable headers={headers}>
+    <BaseTable
+      headers={headers}
+      addButton={<Button>Add new animal</Button>}
+      searchPlaceholder="Search animal by name..."
+    >
       <AnimalsTable />
-    </GenericTable>
+    </BaseTable>
   );
 };
 
