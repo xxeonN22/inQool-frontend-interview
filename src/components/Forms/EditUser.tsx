@@ -10,14 +10,16 @@ import InputData from '../InputData/InputData';
 import SelectOption from '../SelectOption/SelectOption';
 import SelectGender from '../SelectOption/SelectGender';
 import UserBanStatus from '../RadioGroup/RadioOption';
+import Modal from '../Modal/Modal';
 
 interface EditUserProps {
   user: User;
+  trigger: React.ReactNode | string;
 }
 
-const EditUser = ({ user }: EditUserProps) => {
+const EditUser = ({ user, trigger }: EditUserProps) => {
   return (
-    <>
+    <Modal trigger={trigger}>
       <DialogHeader>
         <DialogTitle>Edit {user.name} details</DialogTitle>
         <DialogDescription>
@@ -25,7 +27,13 @@ const EditUser = ({ user }: EditUserProps) => {
         </DialogDescription>
       </DialogHeader>
       <div className="grid gap-4 py-4">
-        <InputData defaultValue={user.name} name="name" label="User name" />
+        <InputData
+          defaultValue={user.name}
+          name="name"
+          id="name"
+          label="User name"
+          autocomplete="name"
+        />
         <SelectOption defaultValue={user.gender}>
           <SelectGender />
         </SelectOption>
@@ -34,7 +42,7 @@ const EditUser = ({ user }: EditUserProps) => {
       <DialogFooter>
         <Button type="submit">Confirm edit</Button>
       </DialogFooter>
-    </>
+    </Modal>
   );
 };
 
