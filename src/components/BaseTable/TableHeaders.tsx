@@ -1,7 +1,8 @@
 import { TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 type Header = {
-  name: string;
+  id: number;
+  name: string | React.ReactNode;
   className?: string;
 };
 
@@ -15,10 +16,7 @@ const TableHeaders = ({ headers }: TableHeadersProps) => {
       <TableRow>
         {headers.map((header) => {
           return (
-            <TableHead
-              key={header.name}
-              className={`${header.className} text-center`}
-            >
+            <TableHead key={header.id} className={`${header.className}`}>
               {header.name}
             </TableHead>
           );
