@@ -1,7 +1,8 @@
-import GenericTable from '@/components/BaseTable/BaseTable';
+import BaseTable from '@/components/BaseTable/BaseTable';
 import UsersTable from '@/components/UsersTable/UsersTable';
 import UsersTableLoader from '@/components/UsersTable/UsersTableLoader';
 import useUsers from '@/hooks/useUsers';
+import { Button } from '@/components/ui/button';
 
 const headers = [
   {
@@ -31,9 +32,13 @@ const UsersPage = () => {
   return (
     <>
       {data && !isLoading ? (
-        <GenericTable headers={headers} searchPlaceholder="Search by name...">
+        <BaseTable
+          headers={headers}
+          searchPlaceholder="Search by name..."
+          addButton={<Button>Add new user</Button>}
+        >
           <UsersTable users={data} />
-        </GenericTable>
+        </BaseTable>
       ) : (
         <UsersTableLoader />
       )}
