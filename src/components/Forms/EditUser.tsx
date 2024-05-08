@@ -34,7 +34,12 @@ const EditUser = ({ user, trigger }: EditUserProps) => {
           label="User name"
           autocomplete="name"
         />
-        <SelectOption defaultValue={user.gender}>
+        <SelectOption
+          defaultValue={user.gender}
+          htmlFor="gender"
+          label="Gender"
+          id="gender"
+        >
           <SelectGender />
         </SelectOption>
         <UserBanStatus defaultValue={user.banned ? 'true' : 'false'} />
