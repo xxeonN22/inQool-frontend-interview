@@ -19,7 +19,7 @@ const BaseTable = ({ children, headers }: BaseTableProps) => {
   const [filter, setFilter] = useState('');
   return (
     <FilterContext.Provider value={filter}>
-      <TableSearchFilter setFilter={setFilter} />
+      <TableSearchFilter filter={filter} setFilter={setFilter} />
       <Table>
         <TableHeaders headers={headers} />
         <TableBody>{children}</TableBody>
