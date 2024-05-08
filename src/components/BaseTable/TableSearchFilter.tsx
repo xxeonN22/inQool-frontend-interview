@@ -4,11 +4,17 @@ import InputSearch from '../InputSearch/InputSearch';
 interface TableSearchFilterProps {
   filter: string;
   setFilter: (value: string) => void;
+  placeholder?: string;
 }
 
-const TableSearchFilter = ({ filter, setFilter }: TableSearchFilterProps) => {
+const TableSearchFilter = ({
+  filter,
+  setFilter,
+  placeholder,
+}: TableSearchFilterProps) => {
   return (
     <InputSearch
+      placeholder={placeholder}
       filter={filter}
       onChange={setFilter}
       width="w-full sm:w-1/3"

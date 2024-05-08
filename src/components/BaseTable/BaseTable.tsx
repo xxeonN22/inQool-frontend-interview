@@ -4,22 +4,32 @@ import TableHeaders from '@/components/BaseTable/TableHeaders';
 import TableSearchFilter from '@/components/BaseTable/TableSearchFilter';
 
 type Header = {
-  name: string;
+  id: number;
+  name: string | React.ReactNode;
   className?: string;
 };
 
 interface BaseTableProps {
   children: React.ReactNode;
   headers: Header[];
+  searchPlaceholder?: string;
 }
 
 export const FilterContext = createContext('');
 
-const BaseTable = ({ children, headers }: BaseTableProps) => {
+const BaseTable = ({
+  children,
+  headers,
+  searchPlaceholder,
+}: BaseTableProps) => {
   const [filter, setFilter] = useState('');
   return (
     <FilterContext.Provider value={filter}>
-      <TableSearchFilter filter={filter} setFilter={setFilter} />
+      <TableSearchFilter
+        filter={filter}
+        setFilter={setFilter}
+        placeholder={searchPlaceholder}
+      />
       <Table>
         <TableHeaders headers={headers} />
         <TableBody>{children}</TableBody>
