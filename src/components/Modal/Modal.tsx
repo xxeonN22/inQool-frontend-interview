@@ -6,6 +6,7 @@ interface ModalProps {
   className?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  triggerClass?: string;
 }
 
 const Modal = ({
@@ -14,10 +15,11 @@ const Modal = ({
   className,
   open,
   onOpenChange,
+  triggerClass,
 }: ModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTrigger>{trigger}</DialogTrigger>
+      <DialogTrigger className={triggerClass}>{trigger}</DialogTrigger>
       <DialogContent className={className}>{children}</DialogContent>
     </Dialog>
   );
