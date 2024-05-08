@@ -1,38 +1,53 @@
+import React from 'react';
+import { Control, Controller } from 'react-hook-form';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Label } from '../ui/label';
+import { FormValues } from '@/validationSchemas/user';
 
 interface SelectOptionProps {
-  defaultValue: string;
   children: React.ReactNode;
-  htmlFor?: string;
   label?: string;
-  id?: string;
+  name: keyof FormValues;
+  control: Control<FormValues>;
+  errorMessage?: string;
 }
 
 const SelectOption = ({
-  defaultValue,
-  children,
-  htmlFor,
+  control,
+  name,
   label,
-  id,
+  errorMessage,
+  children,
 }: SelectOptionProps) => {
   return (
     <div>
-      <Label htmlFor={htmlFor}>{label}</Label>
-      <Select defaultValue={defaultValue}>
-        <SelectTrigger
-          id={id}
-          className="focus:border-accent focus:ring-accent focus:ring-offset-0"
-        >
-          <SelectValue placeholder={defaultValue} />
-        </SelectTrigger>
-        <SelectContent>{children}</SelectContent>
-      </Select>
+      <Label htmlFor={name}>{label}</Label>
+      {errorMessage && <span className="text-destructive">{errorMessage}</span>}
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <Select
+            onValueChange={field.onChange}
+            value={field.value}
+            name={name}
+          >
+            <SelectTrigger
+              id={field.name}
+              aria-labelledby={label}
+              className="focus:border-accent focus:ring-accent focus:ring-offset-0"
+            >
+              <SelectValue placeholder="Select option" />
+            </SelectTrigger>
+            <SelectContent>{children}</SelectContent>
+          </Select>
+        )}
+      />
     </div>
   );
 };
