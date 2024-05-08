@@ -42,6 +42,7 @@ const UsersTable = ({ users }: UsersTableProps) => {
                 triggerClass="bg-primary text-primary-foreground px-2 py-1 rounded-sm hover:bg-accent"
               />
               <DeleteUser
+                userId={user.id}
                 userName={user.name}
                 trigger="Delete"
                 triggerClass="bg-destructive text-destructive-foreground px-2 py-1 rounded-sm hover:bg-red-700"
