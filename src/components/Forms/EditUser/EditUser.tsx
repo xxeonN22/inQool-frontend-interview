@@ -3,10 +3,10 @@ import EditUserContent from '@/components/Forms/EditUser/EditUserContent';
 import EditUserHeader from '@/components/Forms/EditUser/EditUserHeader';
 import EditUserFooter from '@/components/Forms/EditUser/EditUserFooter';
 import useEditUser from '@/hooks/useEditUser';
-import { FormValues } from '@/validationSchemas/user';
+import { User } from '@/types/users';
 
 interface EditUserProps {
-  user: FormValues;
+  user: User;
   trigger: React.ReactNode | string;
   triggerClass?: string;
 }
