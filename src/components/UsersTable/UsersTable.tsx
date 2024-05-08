@@ -3,7 +3,7 @@ import { TableCell, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { FilterContext } from '@/components/BaseTable/BaseTable';
 import users from '@/components/UsersTable/mockData';
-import EditUser from '../Forms/EditUser';
+import EditUser from '@/components/Forms/EditUser/EditUser';
 
 const UsersTable = () => {
   const filter = useContext(FilterContext);
@@ -23,9 +23,7 @@ const UsersTable = () => {
             <TableCell className="text-center">{user.name}</TableCell>
             <TableCell className="text-center">{user.gender}</TableCell>
             <TableCell className="text-center">
-              {user.banned && (
-                <Badge>{user.banned === true ? 'BANNED' : ''}</Badge>
-              )}
+              {user.banned && <Badge>{user.banned ? 'BANNED' : ''}</Badge>}
             </TableCell>
             <TableCell className="flex flex-col sm:flex-row justify-center items-center gap-3">
               <EditUser user={user} trigger="Edit" />
