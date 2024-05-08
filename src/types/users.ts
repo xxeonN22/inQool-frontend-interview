@@ -2,7 +2,7 @@ import { BaseModelId } from '@/types/common';
 
 export type User = BaseModelId & {
   name: string;
-  gender: string;
+  gender: 'male' | 'female' | 'other';
   banned: boolean;
 };
 
