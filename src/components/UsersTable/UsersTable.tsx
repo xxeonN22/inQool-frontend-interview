@@ -3,6 +3,7 @@ import { TableCell, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { FilterContext } from '@/components/BaseTable/BaseTable';
 import users from '@/components/UsersTable/mockData';
+import EditUser from '../Forms/EditUser';
 
 const UsersTable = () => {
   const filter = useContext(FilterContext);
@@ -11,7 +12,7 @@ const UsersTable = () => {
     return users.filter((user) =>
       user.name.toLowerCase().includes(filter.toLowerCase())
     );
-  }, [users, filter]);
+  }, [filter]);
 
   return (
     <TableRow>
@@ -26,7 +27,9 @@ const UsersTable = () => {
                 <Badge>{user.banned === true ? 'BANNED' : ''}</Badge>
               )}
             </TableCell>
-            <TableCell className="flex flex-col sm:flex-row justify-center items-center gap-3" />
+            <TableCell className="flex flex-col sm:flex-row justify-center items-center gap-3">
+              <EditUser user={user} trigger="Edit" />
+            </TableCell>
           </React.Fragment>
         );
       })}
