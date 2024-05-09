@@ -20,7 +20,7 @@ const EditAnimal = ({ animal, trigger, triggerClass }: EditAnimalProps) => {
     errors,
     open,
     setOpen,
-    isSubmitting,
+    isPending,
   } = useEditAnimal(animal);
   return (
     <Modal
@@ -36,7 +36,7 @@ const EditAnimal = ({ animal, trigger, triggerClass }: EditAnimalProps) => {
           control={control}
           errors={errors}
         />
-        <EntityEditFormFooter isSubmitting={isSubmitting} />
+        <EntityEditFormFooter isPending={isPending} />
       </form>
     </Modal>
   );

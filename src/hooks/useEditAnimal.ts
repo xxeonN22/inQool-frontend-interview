@@ -1,20 +1,42 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormValues, formSchema } from '@/validationSchemas/animal';
 import { Animal, AnimalForm } from '@/types/animals';
-import { useAnimalEdit } from '@/hooks/useAnimals';
 import { toast } from '@/components/ui/use-toast';
+import AnimalsApi from '@/api/animalApi';
 
 const useEditAnimal = (animal: Animal) => {
   const [open, setOpen] = useState(false);
-  const { mutate: editAnimal } = useAnimalEdit(animal.id);
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (payload: AnimalForm) =>
+      AnimalsApi.updateSingle(animal.id, payload),
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: ['animals'],
+      });
+      setOpen(false);
+      toast({
+        title: `Successfully edited user with name ${data.name}`,
+        variant: 'primary',
+      });
+    },
+    onError: () => {
+      toast({
+        title: `There was error while editing user, try again`,
+        variant: 'destructive',
+      });
+    },
+  });
 
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,32 +52,20 @@ const useEditAnimal = (animal: Animal) => {
       type: data.type,
       age: parseInt(data.age, 10),
     };
-    editAnimal(payload, {
-      onSuccess: () => {
-        setOpen(false);
-        toast({
-          title: `Successfully edited user with name ${data.name}`,
-          variant: 'primary',
-        });
-      },
-      onError: () => {
-        toast({
-          title: `There was error while editing user, try again`,
-          variant: 'primary',
-        });
-      },
-    });
+    mutation.mutate(payload);
   };
+
+  const { isPending } = mutation;
+
   return {
     register,
     handleSubmit,
     control,
     errors,
-    isSubmitting,
-    isSubmitSuccessful,
     open,
     setOpen,
     onSubmit,
+    isPending,
   };
 };
 
