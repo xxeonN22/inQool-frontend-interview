@@ -1,5 +1,5 @@
 import React from 'react';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
 import {
   Select,
@@ -7,26 +7,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { FormValues } from '@/validationSchemas/user';
 
-interface SelectOptionProps {
+interface SelectOptionProps<T extends FieldValues> {
   children: React.ReactNode;
   label?: string;
-  name: keyof FormValues;
-  control: Control<FormValues>;
+  name: Path<T>;
+  control: Control<T>;
   errorMessage?: string;
 }
 
-const SelectOption = ({
+const SelectOption = <T extends FieldValues>({
   control,
   name,
   label,
   errorMessage,
   children,
-}: SelectOptionProps) => {
+}: SelectOptionProps<T>) => {
   return (
     <div>
-      <Label htmlFor={name}>{label}</Label>
+      <Label htmlFor={String(name)}>{label}</Label>
       {errorMessage && <span className="text-destructive">{errorMessage}</span>}
       <Controller
         name={name}
@@ -35,7 +34,7 @@ const SelectOption = ({
           <Select
             onValueChange={field.onChange}
             value={field.value}
-            name={name}
+            name={String(name)}
           >
             <SelectTrigger
               id={field.name}
