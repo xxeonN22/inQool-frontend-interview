@@ -22,12 +22,20 @@ const UserBanStatus = ({ user }: UserBanStatusProps) => {
     <>
       {user.banned ? (
         <div>
-          <Button size="sm" onClick={() => handleEdit()}>
+          <Button
+            size="sm"
+            className="h-7 px-2 font-normal rounded-sm"
+            onClick={() => handleEdit()}
+          >
             Remove ban
           </Button>
         </div>
       ) : (
-        <Button size="sm" onClick={() => handleEdit()}>
+        <Button
+          size="sm"
+          className="h-7 px-2 font-normal rounded-sm"
+          onClick={() => handleEdit()}
+        >
           Give ban
         </Button>
       )}
