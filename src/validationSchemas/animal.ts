@@ -6,7 +6,7 @@ export const formSchema = z.object({
     .min(3, { message: 'Animal name must be at least 3 characters long.' }),
   type: z.enum(['cat', 'dog', 'other']),
   age: z.string().regex(/^\d+$/, {
-    message: 'Age can be only number',
+    message: 'Age must be positive number, 0 included',
   }),
 });
 
