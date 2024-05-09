@@ -12,7 +12,7 @@ const UserRowButtons = ({ user }: UserRowButtonsProps) => {
       <EditUser
         user={user}
         trigger="Edit"
-        triggerClass="bg-primary text-primary-foreground px-2 py-1 rounded-sm hover:bg-accent"
+        triggerClass="bg-accent text-accent-foreground px-2 py-1 rounded-sm hover:bg-primary"
       />
       <DeleteUser
         userId={user.id}
