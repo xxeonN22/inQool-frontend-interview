@@ -1,14 +1,14 @@
 import { useContext, useMemo } from 'react';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { FilterContext } from '@/components/BaseTable/BaseTable';
-import AnimalRowButtons from '@/components/AnimalsTable/AnimalRowButtons';
+import AnimalRowButtons from '@/components/Animals/AnimalRowButtons';
 import { Animal } from '@/types/animals';
 
-interface AnimalsTableProps {
+interface TableDataAnimalsProps {
   animals: Animal[];
 }
 
-const AnimalsTable = ({ animals }: AnimalsTableProps) => {
+const TableDataAnimals = ({ animals }: TableDataAnimalsProps) => {
   const filter = useContext(FilterContext);
 
   const filteredAndSortedAnimals = useMemo(() => {
@@ -40,4 +40,4 @@ const AnimalsTable = ({ animals }: AnimalsTableProps) => {
   );
 };
 
-export default AnimalsTable;
+export default TableDataAnimals;
