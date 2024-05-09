@@ -1,8 +1,7 @@
 import { useContext, useMemo } from 'react';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { FilterContext } from '@/components/BaseTable/BaseTable';
-import { Button } from '@/components/ui/button';
-import DeleteAnimal from '@/components/Forms/DeleteAnimal/DeleteAnimal';
+import AnimalRowButtons from '@/components/AnimalsTable/AnimalRowButtons';
 import { Animal } from '@/types/animals';
 
 interface AnimalsTableProps {
@@ -33,20 +32,7 @@ const AnimalsTable = ({ animals }: AnimalsTableProps) => {
             {animal.age}
           </TableCell>
           <TableCell className="px-0 sm:p-4 w-[10%] text-center">
-            <div className="flex flex-col gap-2 sm:flex-row sm:gap-8 justify-center items-center">
-              <Button
-                size="sm"
-                className="bg-accent text-accent-foreground hover:bg-primary"
-              >
-                Edit
-              </Button>
-              <DeleteAnimal
-                animalName={animal.name}
-                animalId={animal.id}
-                trigger="Delete"
-                triggerClass="bg-destructive text-destructive-foreground px-2 py-1 rounded-sm hover:bg-red-700"
-              />
-            </div>
+            <AnimalRowButtons animal={animal} />
           </TableCell>
         </TableRow>
       ))}
