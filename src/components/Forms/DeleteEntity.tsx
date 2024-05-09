@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { DialogTitle } from '@radix-ui/react-dialog';
 import Modal from '@/components/Modal/Modal';
 import { DialogDescription, DialogHeader } from '@/components/ui/dialog';
@@ -9,6 +8,9 @@ interface DeleteEntityProps {
   trigger: React.ReactNode | string;
   triggerClass?: string;
   deleteEntity: () => void;
+  open?: boolean;
+  setOpen(open: boolean): void;
+  isPending?: boolean;
 }
 
 const DeleteEntity = ({
@@ -16,8 +18,10 @@ const DeleteEntity = ({
   trigger,
   triggerClass,
   deleteEntity,
+  open,
+  setOpen,
+  isPending,
 }: DeleteEntityProps) => {
-  const [open, setOpen] = useState(false);
   return (
     <Modal
       trigger={trigger}
@@ -33,9 +37,9 @@ const DeleteEntity = ({
         </DialogDescription>
       </DialogHeader>
       <Button
+        disabled={isPending}
         className="bg-destructive text-destructive-foreground mt-6 hover:bg-red-700 mx-auto"
         onClick={() => {
-          setOpen(false);
           deleteEntity();
         }}
       >

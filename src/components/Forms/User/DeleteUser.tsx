@@ -1,5 +1,5 @@
 import DeleteEntity from '@/components/Forms/DeleteEntity';
-import { useUserDelete } from '@/hooks/useUsers';
+import useDeleteUser from '@/hooks/useDeleteUser';
 
 interface DeleteUserProps {
   userName: string;
@@ -14,13 +14,20 @@ const DeleteUser = ({
   trigger,
   triggerClass,
 }: DeleteUserProps) => {
-  const { mutateAsync: deleteUser } = useUserDelete(userId);
+  const { deleteUser, open, setOpen, isPending } = useDeleteUser(
+    userId,
+    userName
+  );
+
   return (
     <DeleteEntity
       entityName={userName}
       deleteEntity={deleteUser}
       trigger={trigger}
       triggerClass={triggerClass}
+      open={open}
+      setOpen={setOpen}
+      isPending={isPending}
     />
   );
 };
