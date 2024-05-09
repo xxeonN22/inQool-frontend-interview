@@ -25,7 +25,7 @@ const UserFormContent = ({
         register={register}
         errorMessage={errors.name && errors.name.message}
       />
-      <SelectOption name="gender" label="Gender" control={control}>
+      <SelectOption<FormValues> name="gender" label="Gender" control={control}>
         <SelectGender />
       </SelectOption>
     </div>
