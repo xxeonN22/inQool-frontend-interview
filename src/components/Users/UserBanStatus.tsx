@@ -1,23 +1,13 @@
-import { User, UserForm } from '@/types/users';
+import { User } from '@/types/users';
 import { Button } from '@/components/ui/button';
-import { useUserEdit } from '@/hooks/useUsers';
+import useBanUser from '@/hooks/useBanUser';
 
 interface UserBanStatusProps {
   user: User;
 }
 
 const UserBanStatus = ({ user }: UserBanStatusProps) => {
-  const { mutate: editUser } = useUserEdit(user.id);
-
-  const handleEdit = () => {
-    const payload: UserForm = {
-      name: user.name,
-      gender: user.gender,
-      banned: !user.banned,
-    };
-    editUser(payload);
-  };
-
+  const handleEdit = useBanUser(user);
   return (
     <>
       {user.banned ? (
