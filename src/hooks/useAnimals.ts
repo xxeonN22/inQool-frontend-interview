@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/return-await */
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import AnimalsApi from '@/api/animalApi';
+import { AnimalForm } from '@/types/animals';
 
 export const useAnimals = () => {
   return useQuery({
@@ -14,6 +16,32 @@ export const useAnimalDelete = (id: string) => {
     mutationFn: async () => {
       await AnimalsApi.deleteSingle(id);
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['animals'],
+      });
+    },
+  });
+};
+
+export const useAnimalEdit = (id: string) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: AnimalForm) =>
+      await AnimalsApi.updateSingle(id, payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['animals'],
+      });
+    },
+  });
+};
+
+export const useAnimalAdd = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: AnimalForm) =>
+      await AnimalsApi.createSingle(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['animals'],
