@@ -1,10 +1,10 @@
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import { FormValues, formSchema } from '@/validationSchemas/animal';
-import { AnimalForm } from '@/types/animals';
 import { toast } from '@/components/ui/use-toast';
+import { AnimalForm } from '@/types/animals';
 import AnimalsApi from '@/api/animalApi';
 
 const useAddAnimal = () => {

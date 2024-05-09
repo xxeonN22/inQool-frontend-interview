@@ -1,8 +1,8 @@
 import Modal from '@/components/Modal/Modal';
 import UserFormContent from '@/components/Forms/User/UserFormContent';
-import useAddUser from '@/hooks/useAddUser';
 import AddNewEntityHeader from '@/components/Forms/AddNewEntityHeader';
 import AddNewEntityFooter from '@/components/Forms/AddNewEntityFooter';
+import useAddUser from '@/hooks/useAddUser';
 
 interface AddNewUserProps {
   trigger: React.ReactNode | string;

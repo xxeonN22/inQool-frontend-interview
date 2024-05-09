@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormValues, formSchema } from '@/validationSchemas/user';
-import { User, UserForm } from '@/types/users';
 import { useToast } from '@/components/ui/use-toast';
+import { User, UserForm } from '@/types/users';
 import UsersApi from '@/api/userApi';
 
 const useEditUser = (user: User) => {

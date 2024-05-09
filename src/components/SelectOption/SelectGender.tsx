@@ -1,4 +1,4 @@
-import { SelectItem } from '../ui/select';
+import { SelectItem } from '@/components/ui/select';
 
 const SelectGender = () => {
   return (
