@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/return-await */
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import UsersApi from '../api/userApi';
+import UsersApi from '@/api/userApi';
 import { UserForm } from '@/types/users';
 
 const useUsers = () => {
@@ -40,6 +40,19 @@ export const useUserEdit = (id: string) => {
       });
       queryClient.invalidateQueries({
         queryKey: ['user', id],
+      });
+    },
+  });
+};
+
+export const useUserAdd = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: UserForm) =>
+      await UsersApi.createSingle(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['users'],
       });
     },
   });
