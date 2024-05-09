@@ -10,8 +10,16 @@ interface AddNewUserProps {
 }
 
 const AddUser = ({ trigger, triggerClass }: AddNewUserProps) => {
-  const { open, setOpen, handleSubmit, onSubmit, register, control, errors } =
-    useAddUser();
+  const {
+    open,
+    setOpen,
+    handleSubmit,
+    onSubmit,
+    register,
+    control,
+    errors,
+    isPending,
+  } = useAddUser();
 
   return (
     <Modal
@@ -27,7 +35,7 @@ const AddUser = ({ trigger, triggerClass }: AddNewUserProps) => {
           control={control}
           errors={errors}
         />
-        <AddNewEntityFooter entityName="user" />
+        <AddNewEntityFooter entityName="user" isPending={isPending} />
       </form>
     </Modal>
   );

@@ -1,21 +1,42 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { UserForm } from '@/types/users';
 import { FormValues, formSchema } from '@/validationSchemas/user';
-import { useUserAdd } from '@/hooks/useUsers';
 import { useToast } from '@/components/ui/use-toast';
+import UsersApi from '@/api/userApi';
 
 const useAddUser = () => {
   const [open, setOpen] = useState(false);
-  const { mutate: addUser } = useUserAdd();
+  const queryClient = useQueryClient();
   const { toast } = useToast();
+
+  const mutation = useMutation({
+    mutationFn: (payload: UserForm) => UsersApi.createSingle(payload),
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: ['users'],
+      });
+      setOpen(false);
+      toast({
+        title: `Successfully added user with name ${data.name}`,
+        variant: 'primary',
+      });
+    },
+    onError: () => {
+      toast({
+        title: `There was error while adding user, try again`,
+        variant: 'destructive',
+      });
+    },
+  });
 
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,23 +51,11 @@ const useAddUser = () => {
       gender: data.gender,
       banned: false,
     };
-
-    addUser(payload, {
-      onSuccess: () => {
-        setOpen(false);
-        toast({
-          title: `Successfully added user with name ${data.name}`,
-          variant: 'primary',
-        });
-      },
-      onError: () => {
-        toast({
-          title: `There was error while adding new user, try again`,
-          variant: 'primary',
-        });
-      },
-    });
+    mutation.mutate(payload);
   };
+
+  const { isPending } = mutation;
+
   return {
     register,
     handleSubmit,
@@ -55,7 +64,7 @@ const useAddUser = () => {
     open,
     setOpen,
     onSubmit,
-    isSubmitting,
+    isPending,
   };
 };
 
