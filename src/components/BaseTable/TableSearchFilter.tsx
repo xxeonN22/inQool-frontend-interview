@@ -1,5 +1,5 @@
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import InputSearch from '../InputSearch/InputSearch';
+import InputSearch from '@/components/InputSearch/InputSearch';
 
 interface TableSearchFilterProps {
   filter: string;
