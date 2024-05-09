@@ -26,7 +26,7 @@ const InputData = <T extends FieldValues>({
   register,
 }: InputDataProps<T>) => {
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       {errorMessage && (
         <span className="text-destructive inline-block mb-1 text-sm">
           {errorMessage}
