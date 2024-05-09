@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormValues, formSchema } from '@/validationSchemas/user';
 import { User, UserForm } from '@/types/users';
-import { useUserEdit } from './useUsers';
+import { useUserEdit } from '@/hooks/useUsers';
 
 const useEditUser = (user: User) => {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,7 @@ const useEditUser = (user: User) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: user?.name || '',
-      gender: user?.gender || 'Other',
+      gender: user?.gender || 'other',
     },
   });
 
