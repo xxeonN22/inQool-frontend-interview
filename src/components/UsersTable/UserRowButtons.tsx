@@ -1,6 +1,6 @@
 import { User } from '@/types/users';
-import DeleteUser from '@/components/Forms/DeleteUser/DeleteUser';
-import EditUser from '@/components/Forms/EditUser/EditUser';
+import DeleteUser from '@/components/Forms/User/DeleteUser';
+import EditUser from '@/components/Forms/User/EditUser';
 
 interface UserRowButtonsProps {
   user: User;
