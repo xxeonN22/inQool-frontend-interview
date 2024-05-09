@@ -1,5 +1,5 @@
 import Modal from '@/components/Modal/Modal';
-import EditUserContent from '@/components/Forms/EditUser/EditUserContent';
+import UserFormContent from '@/components/Forms/UserFormContent';
 import EditUserHeader from '@/components/Forms/EditUser/EditUserHeader';
 import EditUserFooter from '@/components/Forms/EditUser/EditUserFooter';
 import useEditUser from '@/hooks/useEditUser';
@@ -32,7 +32,7 @@ const EditUser = ({ user, trigger, triggerClass }: EditUserProps) => {
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <EditUserHeader userName={user.name} />
-        <EditUserContent
+        <UserFormContent
           register={register}
           control={control}
           errors={errors}

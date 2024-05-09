@@ -4,17 +4,17 @@ import SelectOption from '@/components/SelectOption/SelectOption';
 import SelectGender from '@/components/SelectOption/SelectGender';
 import { FormValues } from '@/validationSchemas/user';
 
-interface EditUserContentProps {
+interface UserFormContentProps {
   register: UseFormRegister<FormValues>;
   control: Control<FormValues>;
   errors: FieldErrors<FormValues>;
 }
 
-const EditUserContent = ({
+const UserFormContent = ({
   register,
   control,
   errors,
-}: EditUserContentProps) => {
+}: UserFormContentProps) => {
   return (
     <div className="grid gap-4 py-4">
       <InputData<FormValues>
@@ -32,4 +32,4 @@ const EditUserContent = ({
   );
 };
 
-export default EditUserContent;
+export default UserFormContent;
