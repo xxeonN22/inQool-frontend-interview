@@ -1,21 +1,31 @@
 import { useContext, useMemo } from 'react';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { FilterContext } from '@/components/BaseTable/BaseTable';
-import animals from '@/components/AnimalsTable/mockData';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
+import DeleteAnimal from '@/components/Forms/DeleteAnimal/DeleteAnimal';
+import { Animal } from '@/types/animals';
 
-const AnimalsTable = () => {
+interface AnimalsTableProps {
+  animals: Animal[];
+}
+
+const AnimalsTable = ({ animals }: AnimalsTableProps) => {
   const filter = useContext(FilterContext);
 
-  const filteredAnimals = useMemo(() => {
-    return animals.filter((animal) =>
+  const filteredAndSortedAnimals = useMemo(() => {
+    const filtered = animals.filter((animal) =>
       animal.name.toLowerCase().includes(filter.toLowerCase())
     );
-  }, [filter]);
+    const sorted = filtered.sort((a, b) => {
+      return a.id.localeCompare(b.id);
+    });
+
+    return sorted;
+  }, [animals, filter]);
 
   return (
     <>
-      {filteredAnimals.map((animal) => (
+      {filteredAndSortedAnimals.map((animal) => (
         <TableRow key={animal.id}>
           <TableCell className="px-0 sm:p-4 w-[40%]">{animal.name}</TableCell>
           <TableCell className="px-0 sm:p-4 w-[25%]">{animal.type}</TableCell>
@@ -30,12 +40,12 @@ const AnimalsTable = () => {
               >
                 Edit
               </Button>
-              <Button
-                size="sm"
-                className="bg-destructive text-destructive-foreground hover:bg-red-700"
-              >
-                Delete
-              </Button>
+              <DeleteAnimal
+                animalName={animal.name}
+                animalId={animal.id}
+                trigger="Delete"
+                triggerClass="bg-destructive text-destructive-foreground px-2 py-1 rounded-sm hover:bg-red-700"
+              />
             </div>
           </TableCell>
         </TableRow>
