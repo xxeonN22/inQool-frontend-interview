@@ -1,6 +1,8 @@
 import AnimalsTable from '@/components/AnimalsTable/AnimalsTable';
+import AnimalsTableLoader from '@/components/AnimalsTable/AnimalsTableLoader';
 import BaseTable from '@/components/BaseTable/BaseTable';
 import { Button } from '@/components/ui/button';
+import { useAnimals } from '@/hooks/useAnimals';
 
 const headers = [
   {
@@ -26,14 +28,21 @@ const headers = [
 ];
 
 const AnimalsPage = () => {
+  const { data, isLoading } = useAnimals();
   return (
-    <BaseTable
-      headers={headers}
-      addButton={<Button>Add new animal</Button>}
-      searchPlaceholder="Search animal by name..."
-    >
-      <AnimalsTable />
-    </BaseTable>
+    <>
+      {data && !isLoading ? (
+        <BaseTable
+          headers={headers}
+          searchPlaceholder="Search by name..."
+          addButton={<Button>Add new animal</Button>}
+        >
+          <AnimalsTable animals={data} />
+        </BaseTable>
+      ) : (
+        <AnimalsTableLoader />
+      )}
+    </>
   );
 };
 
