@@ -1,32 +1,35 @@
-import { useEffect, useState } from 'react';
-import { useUserDelete } from './useUsers';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
+import UsersApi from '@/api/userApi';
 
-const useDeleteUser = (userId: string, userName: string) => {
-  const {
-    mutate: deleteUser,
-    isSuccess,
-    isError,
-    isPending,
-  } = useUserDelete(userId);
+const useDeleteUser = (userId: string) => {
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (isSuccess) {
-      toast({
-        title: `Successfully removed user with name ${userName}`,
-        variant: 'primary',
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: () => UsersApi.deleteSingle(userId),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ['users'],
       });
       setOpen(false);
-    } else if (isError) {
       toast({
-        title: `There was an error while removing the user, try again`,
+        title: `Successfully removed user`,
+        variant: 'primary',
+      });
+    },
+    onError: () => {
+      toast({
+        title: `Error while removing user, try again later`,
         variant: 'destructive',
       });
-    }
-  }, [isSuccess, isError, toast, isPending, userName]);
-  return { deleteUser, open, setOpen, isPending };
+    },
+  });
+  const { isPending, mutate } = mutation;
+
+  return { open, setOpen, isPending, mutate };
 };
 
 export default useDeleteUser;

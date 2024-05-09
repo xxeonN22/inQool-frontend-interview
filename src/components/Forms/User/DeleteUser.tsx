@@ -14,15 +14,12 @@ const DeleteUser = ({
   trigger,
   triggerClass,
 }: DeleteUserProps) => {
-  const { deleteUser, open, setOpen, isPending } = useDeleteUser(
-    userId,
-    userName
-  );
+  const { open, setOpen, isPending, mutate } = useDeleteUser(userId);
 
   return (
     <DeleteEntity
       entityName={userName}
-      deleteEntity={deleteUser}
+      deleteEntity={mutate}
       trigger={trigger}
       triggerClass={triggerClass}
       open={open}
