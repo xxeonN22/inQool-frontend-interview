@@ -12,6 +12,7 @@ interface InputDataProps<T extends FieldValues> {
   defaultValue?: string;
   name: Path<T>;
   register: UseFormRegister<T>;
+  type?: string;
 }
 
 const InputData = <T extends FieldValues>({
@@ -24,6 +25,7 @@ const InputData = <T extends FieldValues>({
   defaultValue,
   name,
   register,
+  type,
 }: InputDataProps<T>) => {
   return (
     <div className="flex flex-col gap-2">
@@ -40,6 +42,7 @@ const InputData = <T extends FieldValues>({
         {...register(name)}
         id={id}
         autoComplete={autocomplete}
+        type={type}
       />
     </div>
   );
