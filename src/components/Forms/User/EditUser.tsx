@@ -12,16 +12,8 @@ interface EditUserProps {
 }
 
 const EditUser = ({ user, trigger, triggerClass }: EditUserProps) => {
-  const {
-    register,
-    handleSubmit,
-    onSubmit,
-    control,
-    errors,
-    open,
-    setOpen,
-    isSubmitting,
-  } = useEditUser(user);
+  const { register, handleSubmit, onSubmit, control, errors, open, setOpen } =
+    useEditUser(user);
 
   return (
     <Modal
@@ -37,7 +29,7 @@ const EditUser = ({ user, trigger, triggerClass }: EditUserProps) => {
           control={control}
           errors={errors}
         />
-        <EntityEditFormFooter isSubmitting={isSubmitting} />
+        <EntityEditFormFooter />
       </form>
     </Modal>
   );
