@@ -2,7 +2,7 @@ import BaseTable from '@/components/BaseTable/BaseTable';
 import UsersTable from '@/components/UsersTable/UsersTable';
 import UsersTableLoader from '@/components/UsersTable/UsersTableLoader';
 import useUsers from '@/hooks/useUsers';
-import AddNewUser from '@/components/Forms/AddUser/AddNewUser';
+import AddUser from '@/components/Forms/User/AddUser';
 
 const headers = [
   {
@@ -36,7 +36,7 @@ const UsersPage = () => {
           headers={headers}
           searchPlaceholder="Search by name..."
           addButton={
-            <AddNewUser
+            <AddUser
               trigger="Add new user"
               triggerClass="bg-primary text-primary-foreground rounded-md px-4 py-2"
             />

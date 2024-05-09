@@ -1,7 +1,7 @@
 import AnimalsTable from '@/components/AnimalsTable/AnimalsTable';
 import AnimalsTableLoader from '@/components/AnimalsTable/AnimalsTableLoader';
 import BaseTable from '@/components/BaseTable/BaseTable';
-import { Button } from '@/components/ui/button';
+import AddAnimal from '@/components/Forms/Animal/AddAnimal';
 import { useAnimals } from '@/hooks/useAnimals';
 
 const headers = [
@@ -35,7 +35,12 @@ const AnimalsPage = () => {
         <BaseTable
           headers={headers}
           searchPlaceholder="Search by name..."
-          addButton={<Button>Add new animal</Button>}
+          addButton={
+            <AddAnimal
+              trigger="Add new animal"
+              triggerClass="bg-primary text-primary-foreground rounded-md px-4 py-2"
+            />
+          }
         >
           <AnimalsTable animals={data} />
         </BaseTable>
