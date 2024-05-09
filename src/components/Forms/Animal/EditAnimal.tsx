@@ -1,5 +1,5 @@
 import Modal from '@/components/Modal/Modal';
-import AnimalFormContent from '@/components/Forms/AnimalFormContent';
+import AnimalFormContent from '@/components/Forms/Animal/AnimalFormContent';
 import EntityEditFormHeader from '@/components/Forms/EntityEditFormHeader';
 import EntityEditFormFooter from '@/components/Forms/EntityEditFormFooter';
 import { Animal } from '@/types/animals';

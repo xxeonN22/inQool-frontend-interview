@@ -1,5 +1,5 @@
-import AnimalsTable from '@/components/AnimalsTable/AnimalsTable';
-import AnimalsTableLoader from '@/components/AnimalsTable/AnimalsTableLoader';
+import TableDataAnimals from '@/components/Animals/TableDataAnimals';
+import AnimalsTableLoader from '@/components/Animals/AnimalsTableLoader';
 import BaseTable from '@/components/BaseTable/BaseTable';
 import AddAnimal from '@/components/Forms/Animal/AddAnimal';
 import { useAnimals } from '@/hooks/useAnimals';
@@ -42,7 +42,7 @@ const AnimalsPage = () => {
             />
           }
         >
-          <AnimalsTable animals={data} />
+          <TableDataAnimals animals={data} />
         </BaseTable>
       ) : (
         <AnimalsTableLoader />

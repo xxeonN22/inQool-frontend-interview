@@ -1,7 +1,7 @@
 import Modal from '@/components/Modal/Modal';
 import AddNewEntityHeader from '@/components/Forms/AddNewEntityHeader';
 import AddNewEntityFooter from '@/components/Forms/AddNewEntityFooter';
-import AnimalFormContent from '@/components/Forms/AnimalFormContent';
+import AnimalFormContent from '@/components/Forms/Animal/AnimalFormContent';
 import useAddAnimal from '@/hooks/useAddAnimal';
 
 interface AddAnimalProps {

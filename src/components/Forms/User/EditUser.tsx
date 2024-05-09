@@ -1,5 +1,5 @@
 import Modal from '@/components/Modal/Modal';
-import UserFormContent from '@/components/Forms/UserFormContent';
+import UserFormContent from '@/components/Forms/User/UserFormContent';
 import EntityEditFormFooter from '@/components/Forms/EntityEditFormFooter';
 import EntityEditFormHeader from '@/components/Forms/EntityEditFormHeader';
 import { User } from '@/types/users';

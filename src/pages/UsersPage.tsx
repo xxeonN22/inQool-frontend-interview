@@ -1,6 +1,6 @@
 import BaseTable from '@/components/BaseTable/BaseTable';
-import UsersTable from '@/components/UsersTable/UsersTable';
-import UsersTableLoader from '@/components/UsersTable/UsersTableLoader';
+import TableDataUsers from '@/components/Users/TableDataUsers';
+import UsersTableLoader from '@/components/Users/UsersTableLoader';
 import useUsers from '@/hooks/useUsers';
 import AddUser from '@/components/Forms/User/AddUser';
 
@@ -42,7 +42,7 @@ const UsersPage = () => {
             />
           }
         >
-          <UsersTable users={data} />
+          <TableDataUsers users={data} />
         </BaseTable>
       ) : (
         <UsersTableLoader />
