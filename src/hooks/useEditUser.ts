@@ -1,15 +1,36 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormValues, formSchema } from '@/validationSchemas/user';
 import { User, UserForm } from '@/types/users';
-import { useUserEdit } from '@/hooks/useUsers';
 import { useToast } from '@/components/ui/use-toast';
+import UsersApi from '@/api/userApi';
 
 const useEditUser = (user: User) => {
   const [open, setOpen] = useState(false);
-  const { mutate: editUser } = useUserEdit(user.id);
+  const queryClient = useQueryClient();
   const { toast } = useToast();
+
+  const mutation = useMutation({
+    mutationFn: (payload: UserForm) => UsersApi.updateSingle(user.id, payload),
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: ['users'],
+      });
+      setOpen(false);
+      toast({
+        title: `Successfully edited user with name ${data.name}`,
+        variant: 'primary',
+      });
+    },
+    onError: () => {
+      toast({
+        title: `There was error while editing user, try again`,
+        variant: 'primary',
+      });
+    },
+  });
 
   const {
     register,
@@ -30,22 +51,11 @@ const useEditUser = (user: User) => {
       gender: data.gender,
       banned: user.banned,
     };
-    editUser(payload, {
-      onSuccess: () => {
-        setOpen(false);
-        toast({
-          title: `Successfully edited user with name ${data.name}`,
-          variant: 'primary',
-        });
-      },
-      onError: () => {
-        toast({
-          title: `There was error while editing user, try again`,
-          variant: 'primary',
-        });
-      },
-    });
+    mutation.mutate(payload);
   };
+
+  const { isPending } = mutation;
+
   return {
     register,
     handleSubmit,
@@ -54,6 +64,7 @@ const useEditUser = (user: User) => {
     open,
     setOpen,
     onSubmit,
+    isPending,
   };
 };
 

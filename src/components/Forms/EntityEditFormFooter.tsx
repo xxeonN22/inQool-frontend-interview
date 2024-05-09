@@ -1,10 +1,16 @@
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 
-const EntityEditFormFooter = () => {
+interface EntityEditFormFooterProps {
+  isPending: boolean;
+}
+
+const EntityEditFormFooter = ({ isPending }: EntityEditFormFooterProps) => {
   return (
     <DialogFooter>
-      <Button type="submit">Confirm edit</Button>
+      <Button type="submit" disabled={isPending}>
+        Confirm edit
+      </Button>
     </DialogFooter>
   );
 };
