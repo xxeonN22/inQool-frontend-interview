@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FormValues, formSchema } from '@/validationSchemas/animal';
 import { Animal, AnimalForm } from '@/types/animals';
 import { useAnimalEdit } from '@/hooks/useAnimals';
+import { toast } from '@/components/ui/use-toast';
 
 const useEditAnimal = (animal: Animal) => {
   const [open, setOpen] = useState(false);
@@ -29,8 +30,21 @@ const useEditAnimal = (animal: Animal) => {
       type: data.type,
       age: parseInt(data.age, 10),
     };
-    editAnimal(payload);
-    setOpen(false);
+    editAnimal(payload, {
+      onSuccess: () => {
+        setOpen(false);
+        toast({
+          title: `Successfully edited user with name ${data.name}`,
+          variant: 'primary',
+        });
+      },
+      onError: () => {
+        toast({
+          title: `There was error while editing user, try again`,
+          variant: 'primary',
+        });
+      },
+    });
   };
   return {
     register,

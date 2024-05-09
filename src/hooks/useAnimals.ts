@@ -28,9 +28,9 @@ export const useAnimalEdit = (id: string) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (payload: AnimalForm) =>
-      await AnimalsApi.updateSingle(id, payload),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
+      AnimalsApi.updateSingle(id, payload),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
         queryKey: ['animals'],
       });
     },
