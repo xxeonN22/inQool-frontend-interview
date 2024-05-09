@@ -10,8 +10,16 @@ interface AddAnimalProps {
 }
 
 const AddAnimal = ({ trigger, triggerClass }: AddAnimalProps) => {
-  const { open, setOpen, handleSubmit, control, onSubmit, register, errors } =
-    useAddAnimal();
+  const {
+    open,
+    setOpen,
+    handleSubmit,
+    control,
+    onSubmit,
+    register,
+    errors,
+    isPending,
+  } = useAddAnimal();
 
   return (
     <Modal
@@ -27,7 +35,7 @@ const AddAnimal = ({ trigger, triggerClass }: AddAnimalProps) => {
           control={control}
           errors={errors}
         />
-        <AddNewEntityFooter entityName="animal" />
+        <AddNewEntityFooter entityName="animal" isPending={isPending} />
       </form>
     </Modal>
   );
