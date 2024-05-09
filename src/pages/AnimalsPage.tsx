@@ -1,3 +1,4 @@
+import { PlusIcon } from '@radix-ui/react-icons';
 import TableDataAnimals from '@/components/Animals/TableDataAnimals';
 import BaseTable from '@/components/BaseTable/BaseTable';
 import AddAnimal from '@/components/Forms/Animal/AddAnimal';
@@ -33,8 +34,13 @@ const AnimalsPage = () => {
         searchPlaceholder="Search by name..."
         addButton={
           <AddAnimal
-            trigger="Add new animal"
-            triggerClass="bg-primary text-primary-foreground rounded-md px-4 py-2"
+            trigger={
+              <>
+                <PlusIcon />
+                Add new animal
+              </>
+            }
+            triggerClass="bg-primary text-primary-foreground rounded-md px-4 py-2 flex items-center gap-2 hover:bg-accent hover:text-accent-foreground"
           />
         }
       >

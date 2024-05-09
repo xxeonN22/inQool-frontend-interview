@@ -1,3 +1,4 @@
+import { PlusIcon } from '@radix-ui/react-icons';
 import BaseTable from '@/components/BaseTable/BaseTable';
 import TableDataUsers from '@/components/Users/TableDataUsers';
 import AddUser from '@/components/Forms/User/AddUser';
@@ -33,8 +34,13 @@ const UsersPage = () => {
         searchPlaceholder="Search by name..."
         addButton={
           <AddUser
-            trigger="Add new user"
-            triggerClass="bg-primary text-primary-foreground rounded-md px-4 py-2"
+            trigger={
+              <>
+                <PlusIcon />
+                Add new user
+              </>
+            }
+            triggerClass="bg-primary text-primary-foreground rounded-md px-4 py-2 flex items-center gap-2 hover:bg-accent hover:text-accent-foreground"
           />
         }
       >
