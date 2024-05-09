@@ -4,16 +4,18 @@ import { useState } from 'react';
 import { UserForm } from '@/types/users';
 import { FormValues, formSchema } from '@/validationSchemas/user';
 import { useUserAdd } from '@/hooks/useUsers';
+import { useToast } from '@/components/ui/use-toast';
 
 const useAddUser = () => {
   const [open, setOpen] = useState(false);
   const { mutate: addUser } = useUserAdd();
+  const { toast } = useToast();
 
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -22,14 +24,28 @@ const useAddUser = () => {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     const payload: UserForm = {
       name: data.name,
       gender: data.gender,
       banned: false,
     };
-    setOpen(false);
-    addUser(payload);
+
+    addUser(payload, {
+      onSuccess: () => {
+        setOpen(false);
+        toast({
+          title: `Successfully added user with name ${data.name}`,
+          variant: 'primary',
+        });
+      },
+      onError: () => {
+        toast({
+          title: `There was error while adding new user, try again`,
+          variant: 'primary',
+        });
+      },
+    });
   };
   return {
     register,
@@ -39,6 +55,7 @@ const useAddUser = () => {
     open,
     setOpen,
     onSubmit,
+    isSubmitting,
   };
 };
 
