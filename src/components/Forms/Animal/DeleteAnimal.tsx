@@ -14,14 +14,11 @@ const DeleteAnimal = ({
   trigger,
   triggerClass,
 }: DeleteAnimalProps) => {
-  const { deleteAnimal, open, setOpen, isPending } = useDeleteAnimal(
-    animalId,
-    animalName
-  );
+  const { open, setOpen, isPending, mutate } = useDeleteAnimal(animalId);
   return (
     <DeleteEntity
       entityName={animalName}
-      deleteEntity={deleteAnimal}
+      deleteEntity={mutate}
       trigger={trigger}
       triggerClass={triggerClass}
       open={open}

@@ -10,20 +10,6 @@ export const useAnimals = () => {
   });
 };
 
-export const useAnimalDelete = (id: string) => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async () => {
-      await AnimalsApi.deleteSingle(id);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['animals'],
-      });
-    },
-  });
-};
-
 export const useAnimalEdit = (id: string) => {
   const queryClient = useQueryClient();
   return useMutation({

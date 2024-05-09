@@ -1,32 +1,35 @@
-import { useEffect, useState } from 'react';
-import { useAnimalDelete } from './useAnimals';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
+import AnimalsApi from '@/api/animalApi';
 
-const useDeleteAnimal = (animalId: string, animalName: string) => {
-  const {
-    mutate: deleteAnimal,
-    isSuccess,
-    isError,
-    isPending,
-  } = useAnimalDelete(animalId);
+const useDeleteAnimal = (animalId: string) => {
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (isSuccess) {
-      toast({
-        title: `Successfully removed animal with name ${animalName}`,
-        variant: 'primary',
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: () => AnimalsApi.deleteSingle(animalId),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ['animals'],
       });
       setOpen(false);
-    } else if (isError) {
       toast({
-        title: `There was an error while removing the animal, try again`,
+        title: `Successfully removed animal`,
+        variant: 'primary',
+      });
+    },
+    onError: () => {
+      toast({
+        title: `Error while removing animal, try again later`,
         variant: 'destructive',
       });
-    }
-  }, [isSuccess, isError, toast, isPending, animalName]);
-  return { deleteAnimal, open, setOpen, isPending };
+    },
+  });
+  const { isPending, mutate } = mutation;
+
+  return { open, setOpen, isPending, mutate };
 };
 
 export default useDeleteAnimal;
