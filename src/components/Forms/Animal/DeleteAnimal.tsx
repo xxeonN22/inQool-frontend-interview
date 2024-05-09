@@ -1,5 +1,5 @@
 import DeleteEntity from '@/components/Forms/DeleteEntity';
-import { useAnimalDelete } from '@/hooks/useAnimals';
+import useDeleteAnimal from '@/hooks/useDeleteAnimal';
 
 interface DeleteAnimalProps {
   animalName: string;
@@ -14,13 +14,19 @@ const DeleteAnimal = ({
   trigger,
   triggerClass,
 }: DeleteAnimalProps) => {
-  const { mutateAsync: deleteAnimal } = useAnimalDelete(animalId);
+  const { deleteAnimal, open, setOpen, isPending } = useDeleteAnimal(
+    animalId,
+    animalName
+  );
   return (
     <DeleteEntity
       entityName={animalName}
       deleteEntity={deleteAnimal}
       trigger={trigger}
       triggerClass={triggerClass}
+      open={open}
+      setOpen={setOpen}
+      isPending={isPending}
     />
   );
 };
