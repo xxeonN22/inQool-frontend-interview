@@ -1,4 +1,4 @@
-import GenericTable from '@/components/BaseTable/BaseTable';
+import BaseTable from '@/components/BaseTable/BaseTable';
 
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -45,7 +45,7 @@ const rows = new Array(20).fill(null).map((_, index) => (
 ));
 
 const UsersTableLoader = () => {
-  return <GenericTable headers={headers}>{rows}</GenericTable>;
+  return <BaseTable headers={headers}>{rows}</BaseTable>;
 };
 
 export default UsersTableLoader;
