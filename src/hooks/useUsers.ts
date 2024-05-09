@@ -12,18 +12,6 @@ const useUsers = () => {
 
 export default useUsers;
 
-export const useUserEdit = (id: string) => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (payload: UserForm) => UsersApi.updateSingle(id, payload),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: ['users'],
-      });
-    },
-  });
-};
-
 export const useUserAdd = () => {
   const queryClient = useQueryClient();
   return useMutation({

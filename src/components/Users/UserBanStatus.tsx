@@ -7,12 +7,13 @@ interface UserBanStatusProps {
 }
 
 const UserBanStatus = ({ user }: UserBanStatusProps) => {
-  const handleEdit = useBanUser(user);
+  const { handleEdit, isPending } = useBanUser(user);
   return (
     <>
       {user.banned ? (
         <div>
           <Button
+            disabled={isPending}
             size="sm"
             className="h-7 px-2 font-normal rounded-sm"
             onClick={() => handleEdit()}
@@ -22,6 +23,7 @@ const UserBanStatus = ({ user }: UserBanStatusProps) => {
         </div>
       ) : (
         <Button
+          disabled={isPending}
           size="sm"
           className="h-7 px-2 font-normal rounded-sm"
           onClick={() => handleEdit()}
