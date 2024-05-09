@@ -23,7 +23,7 @@ export const Toaster = () => {
               )}
             </div>
             {action}
-            <ToastClose />
+            <ToastClose className="text-background hover:text-background" />
           </Toast>
         );
       })}
