@@ -1,15 +1,15 @@
 import { useContext, useMemo } from 'react';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { FilterContext } from '@/components/BaseTable/BaseTable';
+import UserBanStatus from '@/components/Users/UserBanStatus';
+import UserRowButtons from '@/components/Users/UserRowButtons';
 import { User } from '@/types/users';
-import UserBanStatus from '@/components/UsersTable/UserBanStatus';
-import UserRowButtons from '@/components/UsersTable/UserRowButtons';
 
-interface UsersTableProps {
+interface TableDataUsersProps {
   users: User[];
 }
 
-const UsersTable = ({ users }: UsersTableProps) => {
+const TableDataUsers = ({ users }: TableDataUsersProps) => {
   const filter = useContext(FilterContext);
 
   const filteredAndSortedUsers = useMemo(() => {
@@ -41,4 +41,4 @@ const UsersTable = ({ users }: UsersTableProps) => {
   );
 };
 
-export default UsersTable;
+export default TableDataUsers;
