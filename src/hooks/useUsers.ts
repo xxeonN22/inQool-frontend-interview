@@ -2,6 +2,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import UsersApi from '@/api/userApi';
 import { UserForm } from '@/types/users';
+import { toast } from '@/components/ui/use-toast';
 
 const useUsers = () => {
   return useQuery({
@@ -18,12 +19,19 @@ export const useUserDelete = (id: string) => {
     mutationFn: async () => {
       await UsersApi.deleteSingle(id);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
         queryKey: ['users'],
       });
-      queryClient.invalidateQueries({
-        queryKey: ['user', id],
+      toast({
+        title: `Successfully removed user`,
+        variant: 'primary',
+      });
+    },
+    onError: () => {
+      toast({
+        title: `Error while removing user, try again later`,
+        variant: 'destructive',
       });
     },
   });
@@ -32,14 +40,10 @@ export const useUserDelete = (id: string) => {
 export const useUserEdit = (id: string) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (payload: UserForm) =>
-      await UsersApi.updateSingle(id, payload),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
+    mutationFn: async (payload: UserForm) => UsersApi.updateSingle(id, payload),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
         queryKey: ['users'],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ['user', id],
       });
     },
   });
@@ -48,8 +52,7 @@ export const useUserEdit = (id: string) => {
 export const useUserAdd = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (payload: UserForm) =>
-      await UsersApi.createSingle(payload),
+    mutationFn: async (payload: UserForm) => UsersApi.createSingle(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['users'],
