@@ -20,7 +20,7 @@ const useEditAnimal = (animal: Animal) => {
       });
       setOpen(false);
       toast({
-        title: `Successfully edited user with name ${data.name}`,
+        title: `Successfully edited animal with name ${data.name}`,
         variant: 'primary',
       });
     },
