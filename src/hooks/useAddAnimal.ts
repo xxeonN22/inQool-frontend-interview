@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { FormValues, formSchema } from '@/validationSchemas/animal';
 import { AnimalForm } from '@/types/animals';
 import { useAnimalAdd } from '@/hooks/useAnimals';
+import { toast } from '@/components/ui/use-toast';
 
 const useAddAnimal = () => {
   const [open, setOpen] = useState(false);
@@ -23,14 +24,27 @@ const useAddAnimal = () => {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     const payload: AnimalForm = {
       name: data.name,
       type: data.type,
       age: parseInt(data.age, 10),
     };
-    setOpen(false);
-    addAnimal(payload);
+    addAnimal(payload, {
+      onSuccess: () => {
+        setOpen(false);
+        toast({
+          title: `Successfully added animal with name ${data.name}`,
+          variant: 'primary',
+        });
+      },
+      onError: () => {
+        toast({
+          title: `There was error while adding new animal, try again`,
+          variant: 'primary',
+        });
+      },
+    });
   };
   return {
     register,
