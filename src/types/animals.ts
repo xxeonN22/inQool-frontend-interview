@@ -2,7 +2,7 @@ import { BaseModelId } from '@/types/common';
 
 export type Animal = BaseModelId & {
   name: string;
-  type: string;
+  type: 'cat' | 'dog' | 'other';
   age: number;
 };
 
