@@ -26,7 +26,7 @@ const InputSearch = ({
     <div className={`relative ${width}`}>
       {filter !== '' && (
         <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-          <Cross2Icon onClick={() => onChange('')} />
+          <Cross2Icon onClick={() => onChange('')} className="cursor-pointer" />
         </div>
       )}
       <Input
